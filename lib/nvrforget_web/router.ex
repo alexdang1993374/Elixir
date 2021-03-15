@@ -20,9 +20,12 @@ defmodule NvrforgetWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", NvrforgetWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    get "/", Absinthe.Plug.GraphiQL, schema: NvrforgetWeb.Api.Schema, interface: :playground
+    post "/", Absinthe.Plug, schema: NvrforgetWeb.Api.Schema
+  end
 
   # Enables LiveDashboard only for development
   #
